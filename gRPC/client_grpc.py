@@ -11,7 +11,7 @@ def benchmark():
     # Verifica conexão com o servidor
     try:
         grpc.channel_ready_future(channel).result(timeout=5)
-        print("✔ Conectado ao servidor!")
+        print("✔ Cliente conectado ao servidor!")
     except grpc.FutureTimeoutError:
         print("❌ Não foi possível conectar ao servidor.")
         return
@@ -21,13 +21,13 @@ def benchmark():
     # NoArgsNoReturn
     start = time.time()
     stub.NoArgsNoReturn(empty_pb2.Empty())
-    print("NoArgsNoReturn:", time.time() - start)
+    print("NoArgsNoReturn:", time.time() - start, "seconds")
 
     # OneLong
     req = service_pb2.LongRequest(value=42)
     start = time.time()
     stub.OneLong(req)
-    print("OneLong:", time.time() - start)
+    print("OneLong:", time.time() - start, "seconds")
 
     # EightLongs
     req = service_pb2.EightLongsRequest(
@@ -35,20 +35,20 @@ def benchmark():
     )
     start = time.time()
     stub.EightLongs(req)
-    print("EightLongs:", time.time() - start)
+    print("EightLongs:", time.time() - start, "seconds")
 
     # OneString
     req = service_pb2.StringRequest(value="Hello world!")
     start = time.time()
     stub.OneString(req)
-    print("OneString:", time.time() - start)
+    print("OneString:", time.time() - start, "seconds")
 
     # ComplexOperation
     complex_type = service_pb2.ComplexType(name="Alice", age=30)
     req = service_pb2.ComplexRequest(complex=complex_type)
     start = time.time()
     stub.ComplexOperation(req)
-    print("ComplexOperation:", time.time() - start)
+    print("ComplexOperation:", time.time() - start, "seconds")
 
 if __name__ == "__main__":
     benchmark()

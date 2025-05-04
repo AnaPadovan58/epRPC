@@ -1,5 +1,5 @@
-import time
 from thrift import Thrift
+import time
 from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
@@ -13,7 +13,7 @@ def benchmark():
     client = TestService.Client(protocol)
 
     transport.open()
-    print("\n=== Thrift Benchmarks ===")
+    print("\n=== Thrift RTT ===")
 
     # NoArgsNoReturn
     start = time.time()
